@@ -5,7 +5,8 @@ import com.example.brand.dto.ResponseDto;
 import com.example.brand.dto.ResponseTableDto;
 import com.example.brand.entities.ProductsEntity;
 import com.example.brand.repositories.product.ProductRepository;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
+
+import com.example.brand.utils.FileUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-//    @Autowired
-//    FileUtils fileUtils;
+    @Autowired
+    FileUtils fileUtils;
 
     public ResponseDto save(ProductDto productDto) throws Exception {
         String mesage = "";
@@ -49,9 +50,10 @@ public class ProductService {
             productsEntity.setBrandId(productDto.getBrandId());
             productsEntity.setCategoryId(productDto.getCategoryId());
         }
-//        if (productDto.getFileImage() != null) {
-//            productsEntity.setMainImage(fileUtils.savefile(productDto.getFileImage()));
-//        }
+        if (productDto.getFimeImage() != null) {
+
+            productsEntity.setMainImage(fileUtils.savefile(productDto.getFimeImage()));
+        }
         productRepository.save(productsEntity);
 
         ResponseDto responseDto = new ResponseDto(mesage + "thành công");

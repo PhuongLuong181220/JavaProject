@@ -12,15 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.validation.Valid;
-// 1: dựa vào link https://gist.github.com/m-cakir/05470e679b73e2036254cef949432fcc
-// để thực hiện lưu ảnh trên google storage
-// 2: Tạo 1 bảng product_image(id, productId, image_url) 1 sản phẩm có thể có nhiều ảnh
-// 3: Tạo 1 tab (cùng màn hình với create và detail product)
-// để thực hiện upload nhiều ảnh và lưu vào CSDL theo product id
+
 
 @Controller
 @RequestMapping("/backend/product")
@@ -59,7 +56,7 @@ public class ProductController {
     @PostMapping(value = "/save",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String save(@Valid @ModelAttribute("productDto") ProductDto productDto,
-//                       @RequestParam("fileImage") MultipartFile file,
+                       @RequestParam("fileImage") MultipartFile file,
                        BindingResult bindingResult,
                        Model model, RedirectAttributes redirectAttributes) throws Exception {
         ResponseDto responseDto = productService.save(productDto);

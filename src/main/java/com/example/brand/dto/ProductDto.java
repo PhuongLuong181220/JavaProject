@@ -28,5 +28,6 @@ public class ProductDto {
     private double width;
     private Integer brandId;
     private Integer categoryId;
+    private MultipartFile fimeImage;
 
 }
